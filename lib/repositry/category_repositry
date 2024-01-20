@@ -1,0 +1,26 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+// import 'package:cyber_secure/modules/categories_new_model.dart';
+// import 'package:cyber_secure/modules/news_channels_headline_model.dart';
+// import 'package:cyber_secure/modules/news_channels_headline_models.dart';
+
+class categoryRepository {
+  
+
+  Future<categoryTrendsModels> fetchcategoryTrendsApi() async {
+    String url =
+        'https://trendify-ui65.onrender.com/products';
+
+    final response = await http.get(Uri.parse(url));
+    if (kDebugMode) {
+      print(response.body);
+    }
+    if (response.statusCode == 200) {
+      final body = jsonDecode(response.body);
+      return categoryTrendsModels.fromJson(body);
+    }
+    throw Exception('Error');
+  }
+}categoryTrendsModels
